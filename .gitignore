@@ -1,0 +1,37 @@
+# Node modules
+node_modules/
+
+# Build output
+.next/
+out/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local env files
+.env
+.env.*.local
+.env.local
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE/editor settings
+.vscode/
+.idea/
+
+# Optional lock files (depending on your setup)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Coverage & test
+coverage/
+*.lcov
+
+# Public uploads (optional if you're storing user uploads locally)
+public/images/

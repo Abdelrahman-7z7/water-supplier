@@ -75,26 +75,49 @@ exports.login = catchAsync(async (req, res, next) => {
 })
 
 
-exports.protect = async (req, res, next) => {
-    try {
-      const token = req.headers.authorization?.replace('Bearer ', '');
-  
-      if (!token) {
+exports.protect = catchAsync(async (req, res, next) => {
+
+    const token = req.headers.authorization?.replace('Bearer ', '');
+
+    if (!token) {
         return next(new AppError('Missing access token', 401));
-      }
-  
-      const { data: { user }, error } = await supabase.auth.getUser(token);
-  
-      if (error || !user) {
-        return next(new AppError('Invalid or expired token', 401));
-      }
-  
-      req.user = user.id;
-      next();
-    } catch (err) {
-      next(new AppError('Authentication failed', 401));
     }
-};
+
+    const { data: { user }, error } = await supabase.auth.getUser(token);
+
+    if (error || !user) {
+        return next(new AppError('Invalid or expired token', 401));
+    }
+
+    req.user = user.id;
+    next();    
+});
+
+// exports.restrictTo = (...allowedRoles) => {
+//     return async (req, res, next) => {
+//       const userId = req.user?.id;
+//       if (!userId) {
+//         return next(new AppError('Unauthorized. No user ID found.', 401));
+//       }
+  
+//       // Fetch role_name from the `profiles` table
+//       const { data: profile, error } = await supabase
+//         .from('profiles')
+//         .select('role_name')
+//         .eq('id', userId)
+//         .single();
+  
+//       if (error || !profile) {
+//         return next(new AppError('Failed to verify user role.', 403));
+//       }
+  
+//       if (!allowedRoles.includes(profile.role_name)) {
+//         return next(new AppError('You do not have permission to perform this action.', 403));
+//       }
+  
+//       next();
+//     };
+// };
 
 
 // controller/userController.js or wherever you define updateMe

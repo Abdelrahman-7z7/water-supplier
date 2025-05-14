@@ -1,45 +1,59 @@
 const express = require('express')
 const supabase = require('../config/supabaseConfig')
 
+const authController = require('../controller/authController')
+
 const router = express.Router()
 
 
-router.post('/signup', async (req, res) => {
-    const { email, password, username, phone } = req.body;
+router.post('/signup', authController.signup);
+router.post('/login', authController.login);
 
-    // Check if any of the required fields are missing
-    if (!email || !phone || !username || !password) {
-        return res.status(400).json({ error: 'One of the fields is missing' });
+router.use(authController.protect)
+
+router.patch('/updateMe', authController.updateMe)
+
+router.post('/auth/verify-email', async (req, res) => {
+    const { access_token } = req.body;
+  
+    if (!access_token) {
+      return res.status(400).json({ error: 'Missing access token.' });
     }
-
-    // Sign up the user using Supabase Auth
-    const { data, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-        options: {
-            data: {
-                username: username,
-                phone: phone,
-            }
-        }
-    });
-
-    // Handle any errors during sign-up
+  
+    // Use the token to get user info
+    const { data: { user }, error } = await supabase.auth.getUser(access_token);
+  
     if (error) {
-        return res.status(400).json({ error: error.message, details: error.details });
+      return res.status(401).json({ error: 'Invalid or expired token.' });
     }
+  
+    return res.status(200).json({
+      message: 'Email is already verified.',
+      user: user
+    });
+  });
+  
 
-    // Check if the user was created successfully
-    if (data && data.user) {
-        return res.status(200).json({
-            message: 'Sign-up successful, check your email for confirmation (if required).',
-            user: data.user
-        });
-    } else {
-        return res.status(500).json({ error: 'An unexpected error occurred during sign-up.' });
-    }
+  router.get('/me', async (req, res) => {
+    const token = req.headers.authorization?.replace('Bearer ', '');
+  
+    if (!token) return res.status(401).json({ error: 'Missing access token' });
+  
+    const { data: { user }, error: userError } = await supabase.auth.getUser(token);
+    // console.log(user)
+    if (userError) return res.status(401).json({ error: userError.message });
+  
+    const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('username, phone, role_name')
+    .eq('id', user.id)
+    .single();
+  
+    if (profileError) return res.status(400).json({ error: profileError.message });
+  
+    return res.status(200).json({ profile });
 });
-
+  
 
 router.delete('/deleteUser/:id', async(req, res)=>{
     const { id } = req.params;

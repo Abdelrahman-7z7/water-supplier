@@ -9,6 +9,7 @@ const supabase = require('./config/supabaseConfig')
 //Routes
 const userRoute = require('./routes/userRoute')
 const productCategoriesRoute = require('./routes/productCategoriesRoute')
+const productsRoute = require('./routes/productsRoute')
 
 const app = express()
 
@@ -23,6 +24,7 @@ if(process.env.NODE_ENV.trim() === 'development'){
 
 app.use('/api/k1/users', userRoute)
 app.use('/api/k1/product_categories', productCategoriesRoute)
+app.use('/api/k1/products', productsRoute)
 
 app.get('/', (req, res) =>{
     res.json({"name":'Server is running...'})

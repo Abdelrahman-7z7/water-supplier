@@ -1,0 +1,13 @@
+[33ma1d608a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33m26405e4[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{1}: commit: adding the role restriction middleware for later enhancment
+[33ma1d608a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{2}: commit: adjusting the userRoute to follow the clean-code principle - by extracting the route handler into a controller -- downloading some essential libraries
+[33m0657769[m HEAD@{3}: commit: creating the error-controller to handle the global errors based on the evn.NODE_ENV either development or production mode - and creating the authController - creating (signup - login - protect route - updateMe)
+[33mdd09e15[m HEAD@{4}: commit: adjusting the server port
+[33m3b40d11[m HEAD@{5}: commit: creating a catchAsync function to handle the async/await errors by try/catch block --- creating a fullback appError to handles errors through globalErrorHandling using the error-controller to be applied later
+[33m98243e1[m HEAD@{6}: commit: adding morgan for requests - and specify it over the developement mode - adding the controller of the error controller
+[33me29a61a[m HEAD@{7}: commit: adding the signup and deleting route for the user, and assigning the right role for it
+[33mcb9c149[m HEAD@{8}: commit: stop tracking env file
+[33mcec071c[m HEAD@{9}: commit: stop tracking env file
+[33m118c4b9[m HEAD@{10}: commit: first commit setting up the app and servers
+[33mf2f573b[m HEAD@{11}: Branch: renamed refs/heads/master to refs/heads/main
+[33mf2f573b[m HEAD@{13}: commit (initial): first commit

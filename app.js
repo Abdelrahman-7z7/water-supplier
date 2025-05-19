@@ -11,6 +11,7 @@ const userRoute = require('./routes/userRoute')
 const productCategoriesRoute = require('./routes/productCategoriesRoute')
 const productsRoute = require('./routes/productsRoute')
 const locationsRoute = require('./routes/locationsRoute')
+const offersRoute = require('./routes/offersRoute')
 
 const app = express()
 
@@ -27,6 +28,7 @@ app.use('/api/k1/users', userRoute)
 app.use('/api/k1/product_categories', productCategoriesRoute)
 app.use('/api/k1/products', productsRoute)
 app.use('/api/k1/locations', locationsRoute);
+app.use('/api/k1/offers', offersRoute);
 
 app.get('/', (req, res) =>{
     res.json({"name":'Server is running...'})

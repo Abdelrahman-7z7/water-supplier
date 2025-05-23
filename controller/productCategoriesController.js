@@ -1,6 +1,6 @@
 const AppError = require('../utils/appError')
 const catchAsync = require('../utils/catchAsync')
-const supabase = require('../config/supabaseConfig')
+const {supabase} = require('../config/supabaseConfig')
 
 exports.createCategory = catchAsync(async (req, res, next) =>{
     const { title, image_url } = req.body;

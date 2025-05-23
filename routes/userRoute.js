@@ -1,5 +1,5 @@
 const express = require('express')
-const supabase = require('../config/supabaseConfig')
+const {supabase} = require('../config/supabaseConfig')
 
 const authController = require('../controller/authController')
 

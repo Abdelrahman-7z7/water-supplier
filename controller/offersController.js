@@ -1,6 +1,6 @@
 const catchAsync = require('../utils/catchAsync')
 const AppError = require('../utils/appError')
-const supabase = require('../config/supabaseConfig')
+const {supabase} = require('../config/supabaseConfig')
 
 
 exports.getAllOffers = catchAsync(async (req, res, next) => {

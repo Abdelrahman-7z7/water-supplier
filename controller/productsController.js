@@ -1,6 +1,6 @@
 const catchAsync = require('../utils/catchAsync')
 const AppError = require('../utils/appError')
-const supabase = require('../config/supabaseConfig')
+const {supabase} = require('../config/supabaseConfig')
 
 exports.createProduct = catchAsync(async (req, res, next) => {
     const { title, size, description, price, old_price, price_type, category, image_url } = req.body; //category must be added as id

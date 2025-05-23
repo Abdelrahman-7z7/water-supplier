@@ -1,6 +1,6 @@
 const AppError = require('../utils/appError')
 const catchAsync = require('../utils/catchAsync')
-const supabase = require('../config/supabaseConfig')
+const {supabase} = require('../config/supabaseConfig')
 
 
 exports.signup = catchAsync(async (req, res, next) => {

@@ -8,4 +8,12 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY // or use anon key if no auth is needed
 );
 
-module.exports = supabase;
+const supabaseSecret = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY_SECRET // or use anon key if no auth is
+)
+
+module.exports = {
+  supabase,
+  supabaseSecret
+};
